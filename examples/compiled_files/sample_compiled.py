@@ -10,8 +10,13 @@ def myMin(a, b):
 		m = b
 	return m
 
+f = 5.2
+print(f)
+a = int(5.3)
+a = -(1 + 5)
+print(a)
 a = int(input())
-b = 5
+b = ((4 + 3) * 5)
 m = myMin(a, b)
 
 print('Min is: ')

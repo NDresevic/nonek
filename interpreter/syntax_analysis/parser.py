@@ -314,9 +314,15 @@ class Parser(object):
         """
         token = self.current_token
 
-        if token.type == INTEGER:
-            self.eat(INTEGER)
+        if token.type == INT:
+            self.eat(INT)
             return Num(token, self.lexer.line_count)
+        elif token.type == FLOAT:
+            self.eat(FLOAT)
+            return Num(token, self.lexer.line_count)
+        elif token.type == MINUS:
+            self.eat(MINUS)
+            return UnOp(token, self.expr(), self.lexer.line_count)
         elif token.type == LPAREN:
             self.eat(LPAREN)
             node = self.expr()

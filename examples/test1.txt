@@ -22,9 +22,17 @@ Execution {
     INT a
     INT b
     INT m
+    FLOAT f
+
+    #f = 5.2
+    @Stdio.out(#f)
+
+    #a = 5.3
+    #a = - (1 + 5)
+    @Stdio.out(#a)
 
     #a = @Stdio.inINT()
-    #b = 5
+    #b = (4 + 3) * 5
     #m = @This.myMin(#a, #b)
     @Stdio.out('Min is: ')
     @Stdio.out(#m)

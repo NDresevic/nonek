@@ -1,8 +1,9 @@
 import textwrap
 
 from interpreter.lexical_analysis.lexer import Lexer
-from interpreter.syntax_analysis.interpreter import NodeVisitor
+from interpreter.syntax_analysis.interpreter import NodeVisitor, Num
 from interpreter.syntax_analysis.parser import Parser
+from interpreter.lexical_analysis.tokenType import INT, NOT
 
 
 class ASTVisualizer(NodeVisitor):
@@ -290,7 +291,13 @@ class ASTVisualizer(NodeVisitor):
 
         self.visit(node.var_node)
         self.dot_body.append(' = ')
-        self.visit(node.expr)
+        var_type = self.scope_details[self.current_scope][node.var_node.var[1:]]
+        if var_type == INT and isinstance(node.expr, Num):
+            self.dot_body.append('int(')
+            self.visit(node.expr)
+            self.dot_body.append(')')
+        else:
+            self.visit(node.expr)
 
     def visit_Args(self, node):
         for child in node.args:
@@ -338,7 +345,11 @@ class ASTVisualizer(NodeVisitor):
         self.dot_body.append(')')
 
     def visit_UnOp(self, node):
-        self.dot_body.append('not ')
+        if node.token.type == NOT:
+            s = 'not'
+        else:
+            s = '-'
+        self.dot_body.append(s)
         self.visit(node.bool_expr)
 
     def visit_Num(self, node):

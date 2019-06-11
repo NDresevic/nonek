@@ -20,12 +20,20 @@ class Lexer(object):
         else:
             self.current_char = self.text[self.pos]
 
-    def integer(self):
+    def number(self):
         number = ''
         while self.current_char is not None and self.current_char.isdigit():
             number += self.current_char
             self.advance()
-        return int(number)
+        if self.current_char == '.':
+            number += self.current_char
+            self.advance()
+            while self.current_char is not None and self.current_char.isdigit():
+                number += self.current_char
+                self.advance()
+            return Token(FLOAT, float(number))
+
+        return Token(INT, int(number))
 
     def _id(self):
         result = ''
@@ -97,7 +105,7 @@ class Lexer(object):
                 return Token(EOF, None)
 
             if self.current_char.isdigit():
-                return Token(INTEGER, self.integer())
+                return self.number()
 
             if self.current_char.isalpha():
                 return self._id()
