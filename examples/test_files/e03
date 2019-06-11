@@ -1,0 +1,35 @@
+Libraries {
+-> Stdio
+}
+
+Functions {
+
+}
+
+Execution {
+
+    INT a
+    INT b
+    INT c
+    INT d
+    INT max
+
+    #a = @Stdio.inINT()
+    #b = @Stdio.inINT()
+    #c = @Stdio.inINT()
+    #d = @Stdio.inINT()
+
+    #max = #a
+    COND: ((#b > #a) AND (#b > #c) AND (#b > #d)) -> {
+        #max = #b
+    }
+    COND: ((#c > #a) AND (#c > #b) AND (#c > #d)) -> {
+        #max = #c
+    }
+    COND: ((#d > #a) AND (#d > #b) AND (#d > #c)) -> {
+        #max = #d
+    }
+
+    @Stdio.out(#max)
+
+}

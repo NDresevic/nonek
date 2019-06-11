@@ -1,0 +1,69 @@
+program                     : sections
+
+sections                	: (libraries | functions | execution)*
+
+libraries					: LBRACKET (empty | include_library*) RBRACKET
+
+include_library 			: ARROW ID
+
+functions 					: LBRACKET (empty | function_implementation*) RBRACKET
+
+function_implementation 	: MONKEY ID COLON LPAREN parameters_list RPAREN ARROW (type_spec | void) LBRACKET function_body RBRACKET return_statement?
+
+function_body               : LBRACKET statement_list RBRACKET
+
+parameters_list				: empty 
+							| param (COMMA param)*
+
+param                       : type_spec variable
+
+execution					: LBRACKET statement_list RBRACKET
+
+statement_list              : var_declaration
+                            | assignment_statement
+							| function_call
+							| condition_statement
+							| loop_statement
+							| return_statement
+							| empty
+
+var_declaration 	       	: type_spec var 
+
+assignment_statement        : variable ASSIGN (expr | bool_expr | function_call | STRING)
+
+function_call               : MONKEY ID DOT ID LPAREN (variable | INTEGER | STRING)? (COMMA (variable | INTEGER | STRING))* RPAREN
+
+return_statement            : RETURN variable
+
+condition_statement         : COND COLON LPAREN (bool_expr | function_call) RPAREN ARROW LBRACKET statement_list RBRACKET
+
+loop_statement 				: LOOP COLON LPAREN bool_expr RPAREN ARROW LBRACKET statement_list RBRACKET
+
+type_spec                   : INT | FLOAT | STRING | ARRAY
+
+void 						: VOID
+
+variable                    : HASH ID
+
+expr                        : term ((PLUS | MINUS) term)*
+
+bool 						: expr ((comparison_operator | (unar_operator? logical_operator)) expr))*
+
+bool_expr 					: unar_operator? bool
+
+comparison_operator			: LT | GT | LE | GE | EQ | NEQ
+
+logical_operator			: AND | OR
+
+unar_operator				: NOT
+
+term                        : factor ((MUL | NDIV | DIV | MOD) factor)*
+
+factor                      : PLUS factor
+							| MINUS factor
+							| INTEGER
+							| INT
+							| FLOAT
+							| LPAREN expr RPAREN
+							| variable
+							| function_call

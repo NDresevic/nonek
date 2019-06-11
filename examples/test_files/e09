@@ -1,0 +1,51 @@
+Libraries {
+-> Stdio
+-> String
+}
+
+Functions {
+
+}
+
+Execution {
+	STRING s
+	STRING word
+	STRING output
+	STRING c
+	STRING upper
+	INT n
+	INT i
+	INT lenS
+	INT lenW
+
+	#s = @Stdio.inSTRING()
+	#n = @Stdio.inINT()
+	#word = ''
+	#output = ''
+	#i = 0
+	#lenS = @String.size(#s)
+
+	LOOP: (#i < #lenS) -> {
+		#c = @String.get(#s, #i)
+
+		COND: ((@String.isSpace(#c) == 1) OR (@String.isInterpunction(#c) == 1)) -> {
+			#lenW = @String.size(#word)
+
+			COND: (#lenW > #n) -> {
+				#upper = @String.toUpper(#word)
+				@String.append(#output, #upper)
+			}
+			COND: (#lenW <= #n) -> {
+				@String.append(#output, #word)
+			}
+
+			#word = ''
+		}
+
+		@String.append(#word, #c)
+		#i = #i + 1
+	}
+
+	@Stdio.out(#output)
+
+}

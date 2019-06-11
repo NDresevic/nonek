@@ -1,0 +1,38 @@
+%YAML 1.2
+---
+name: nonek
+file_extensions: [nonek]
+scope: source.nonek
+
+contexts:
+  main:
+    - match: \b(COND|LOOP|RETURN)\b
+      scope: keywords
+    - match: "'"
+      push: string
+    - match: \b(INT|FLOAT|ARRAY|STRING|AND|OR|NOT|DIV|MOD)\b
+      scope: types
+    - match: \b(Libraries|Functions|Execution)\b
+      scope: sections 
+    - match: \b([0-9]*[.])?[0-9]+\b
+      scope: numbers
+    - match: "\\#[a-zA-Z_0-9]*"
+      scope: variables
+    - match: "\\@[a-zA-Z_0-9.]*"
+      scope: functions
+    - match: "\\*\\*\\*"
+      push: comments
+
+  string:
+    - meta_scope: strings
+    - match: \\.
+      scope: constant.character.escape.app
+    - match: "'"
+      pop: true
+
+  comments:
+  - meta_scope: comments
+  - match: \\.
+    scope: constant.character.escape.app
+  - match: "\\*\\*\\*"
+    pop: true

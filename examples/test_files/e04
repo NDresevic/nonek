@@ -1,0 +1,28 @@
+Libraries {
+-> Stdio
+}
+
+Functions {
+
+}
+
+Execution {
+    INT x
+    INT sum
+    INT cnt
+    FLOAT res
+
+    #x = @Stdio.inINT()
+    #sum = 0
+    #cnt = 0
+
+    LOOP: (#x != 0) -> {
+        #sum = #sum + #x
+        #cnt = #cnt + 1
+        #x = @Stdio.inINT()
+    }
+
+    #res = #sum / #cnt
+    @Stdio.out(#res)
+
+}

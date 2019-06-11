@@ -1,0 +1,70 @@
+Libraries {
+-> Stdio
+-> FileUtil
+-> Arrays
+-> String
+}
+
+Functions {
+
+}
+
+Execution {
+
+	STRING fielPath
+	STRING content
+	INT n
+	INT m
+	INT i
+	INT j
+	STRING word
+	STRING nWord
+	ARRAY words
+	STRING c
+	INT sol
+	INT contLen
+	INT aSize
+	STRING aElem
+
+	#sol = 0
+	#word = ''
+	@Arrays.init(#words)
+
+	#fielPath = @Stdio.inSTRING()
+	#n = @Stdio.inINT()
+	#m = #n
+	LOOP: (#m > 0) -> {
+		#nWord = @Stdio.inSTRING()
+		@Arrays.append(#words, #nWord)
+		#m = #m - 1
+	}
+
+	#content = @FileUtil.read(#fielPath)
+	#i = 0
+	#contLen = @String.size(#content)
+	LOOP: (#i < #contLen) -> {
+		#c = @String.get(#content, #i)
+		COND: ((@String.isSpace(#c) == 1) OR (@String.isInterpunction(#c) == 1)) -> {
+
+			#j = 0
+			#aSize = @Arrays.size(#words)
+			LOOP: (#j < #aSize) -> {
+				#aElem = @Arrays.get(#words, #j)
+				COND: (@String.equals(#aElem, #word)) -> {
+					#sol = #sol + 1
+				}
+				#j = #j + 1
+			}
+			#word = ''
+		}
+
+		COND: ((@String.isSpace(#c) == 0) AND (@String.isInterpunction(#c) == 0)) -> {
+			@String.append(#word, #c)
+		}
+
+		#i = #i + 1
+	}
+
+	@Stdio.out(#sol)
+
+}

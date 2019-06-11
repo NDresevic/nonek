@@ -1,0 +1,21 @@
+Libraries {
+-> Stdio
+-> Random
+}
+
+Functions {
+
+}
+
+Execution {
+    INT n
+    INT r
+
+    #n = @Stdio.inINT()
+    LOOP: (#n != 0) -> {
+    	#r = @Random.range(1, 100)
+        @Stdio.out(#r)
+        #n = #n - 1
+    }
+
+}

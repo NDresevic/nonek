@@ -1,0 +1,52 @@
+Libraries {
+-> Stdio
+-> Arrays
+-> Math
+-> Number
+-> String
+}
+
+Functions {
+
+}
+
+Execution {
+
+    INT x
+    ARRAY a
+    INT n
+    INT elem
+    STRING output
+    STRING strElem
+    INT index
+    FLOAT sqrt
+
+    @Arrays.init(#a)
+    #output = ''
+    #x = @Stdio.inINT()
+
+    LOOP: (#x > 0) -> {
+        #sqrt = @Math.sqrt(#x)
+        COND: (@Number.isInteger(#sqrt)) -> {
+            @Arrays.append(#a, #x)
+        }
+        #x = @Stdio.inINT()
+    }
+
+    #n = @Arrays.size(#a)
+    COND: (#n > 0) -> {
+        #elem = @Arrays.get(#a, 0)
+        #output = @Number.toString(#elem)
+        #index = 1
+        LOOP: (#index < #n) -> {
+            @String.append(#output, ',')
+            #elem = @Arrays.get(#a, #index)
+            #strElem = @Number.toString(#elem)
+            @String.append(#output, #strElem)
+            #index = #index + 1
+        }
+    }
+
+    @Stdio.out(#output)
+
+}

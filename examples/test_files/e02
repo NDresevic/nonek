@@ -1,0 +1,28 @@
+Libraries {
+-> Stdio
+}
+
+Functions {
+
+}
+
+Execution {
+    INT n
+    INT sum
+
+    #n = @Stdio.inINT()
+
+    #sum = 0
+    LOOP: (#n > 0) -> {
+        #sum = #sum + #n MOD 10
+        #n = #n DIV 10
+    }
+
+    COND: (#sum > 10) -> {
+        @Stdio.out('veci')
+    }
+    COND: (#sum <= 10) -> {
+        @Stdio.out('manji')
+    }
+
+}

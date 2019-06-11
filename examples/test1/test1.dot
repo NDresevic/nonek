@@ -1,0 +1,71 @@
+
+digraph astgraph {
+    node [shape=box, fontsize=12, fontname="Courier", height=.1];
+    ranksep=.3;   
+    edge [arrowsize=.5]
+node1 [label="Program"]
+node2 [label="Library: stdio"]
+node1 -> node2
+node3 [label="Library: math"]
+node1 -> node3
+node4 [label="VarDecl"]
+node5 [label="Type: int"]
+node4 -> node5
+node6 [label="Var: a"]
+node4 -> node6
+node1 -> node4
+node7 [label="Assign"]
+node8 [label="Var: a"]
+node7 -> node8
+node9 [label="<MINUS ->"]
+node10 [label="5"]
+node9 -> node10
+node11 [label="<DIV />"]
+node12 [label="<MUL *>"]
+node13 [label="9"]
+node12 -> node13
+node14 [label="<PLUS +>"]
+node15 [label="3"]
+node14 -> node15
+node16 [label="7"]
+node14 -> node16
+node12 -> node14
+node11 -> node12
+node17 [label="4"]
+node11 -> node17
+node9 -> node11
+node7 -> node9
+node1 -> node7
+node18 [label="VarDecl"]
+node19 [label="Type: int"]
+node18 -> node19
+node20 [label="Var: b"]
+node18 -> node20
+node1 -> node18
+node21 [label="Assign"]
+node22 [label="Var: b"]
+node21 -> node22
+node23 [label="5"]
+node21 -> node23
+node1 -> node21
+node24 [label="FunDecl: main"]
+node25 [label="Type: int"]
+node24 -> node25
+node26 [label="Args"]
+node27 [label="VarDecl"]
+node28 [label="Type: int"]
+node27 -> node28
+node29 [label="Var: a"]
+node27 -> node29
+node26 -> node27
+node30 [label="VarDecl"]
+node31 [label="Type: int"]
+node30 -> node31
+node32 [label="Var: abc"]
+node30 -> node32
+node26 -> node30
+node24 -> node26
+node33 [label="Stmts"]
+node24 -> node33
+node1 -> node24
+}

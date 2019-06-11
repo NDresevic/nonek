@@ -1,0 +1,27 @@
+Libraries {
+-> Stdio
+-> String
+}
+
+Functions {
+
+}
+
+Execution {
+    INT visina
+    STRING pol
+    INT kilaza
+
+    #visina = @Stdio.inINT()
+    #pol = @Stdio.inSTRING()
+
+    COND: (@String.equals(#pol, 'M')) -> {
+        #kilaza = #visina - 100
+    }
+    COND: (@String.equals(#pol, 'F')) -> {
+        #kilaza = #visina - 120
+    }
+
+    @Stdio.out(#kilaza)
+
+}

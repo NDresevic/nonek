@@ -1,0 +1,45 @@
+Libraries {
+-> Stdio
+-> String
+}
+
+Functions {
+
+}
+
+Execution {
+
+  STRING s
+  STRING subs
+  STRING spaces
+  INT i
+  INT j
+  INT n
+  INT end
+  INT m
+  INT t
+
+  #s = @Stdio.inSTRING()
+  #n = @String.size(#s)
+  #m = #n - 1
+  #i = #m DIV 2
+  #j = #n DIV 2
+
+  LOOP: (#j < #n) -> {
+
+    #t = #i
+    #spaces = ''
+    LOOP: (#t > 0) -> {
+      @String.append(#spaces, ' ')
+      #t = #t - 1
+    }
+
+    #end = #j + 1
+    #subs = @String.substring(#s, #i, #end)
+    @String.append(#spaces, #subs)
+    @Stdio.out(#spaces)
+    #i = #i - 1
+    #j = #j + 1
+  }
+
+}

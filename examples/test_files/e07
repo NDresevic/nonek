@@ -1,0 +1,46 @@
+Libraries {
+-> Stdio
+-> String
+}
+
+Functions {
+
+}
+
+Execution {
+
+	STRING s
+	STRING output
+	STRING curr
+	STRING prev
+	INT index
+    INT n
+
+    #output = ''
+    #curr = ''
+    #prev = ''
+    #s = @Stdio.inSTRING()
+
+    #index = 0
+    #n = @String.size(#s)
+    LOOP: (#index < #n) -> {
+    	#curr = @String.get(#s, #index)
+
+    	COND: (@String.notEqual(#prev, '')) -> {
+    		COND: ((@String.isDigit(#prev) == 1) AND (@String.isLetter(#curr) == 1)) -> {
+    			@String.append(#output, '#')
+    		}
+
+    		COND: ((@String.isLetter(#prev) == 1) AND (@String.isDigit(#curr) == 1)) -> {
+    			@String.append(#output, '*')
+    		}
+    	}
+
+        @String.append(#output, #curr)
+    	#prev = #curr
+    	#index = #index + 1
+    }
+
+    @Stdio.out(#output)
+
+}

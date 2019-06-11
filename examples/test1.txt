@@ -1,0 +1,36 @@
+Libraries {
+-> Stdio
+}
+
+Functions {
+
+@myMin: (INT a, INT b) -> INT {
+
+    INT m
+
+    #m = #a
+    COND: (#b < #a) -> {
+       #m = #b
+    }
+
+    RETURN #m
+}
+
+}
+
+Execution {
+    INT a
+    INT b
+    INT m
+
+    #a = @Stdio.inINT()
+    #b = 5
+    #m = @This.myMin(#a, #b)
+    @Stdio.out('Min is: ')
+    @Stdio.out(#m)
+
+    COND: (#m < 2) -> {
+        @Stdio.out('Min is less than 2.')
+    }
+
+}
