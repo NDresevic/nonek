@@ -277,6 +277,9 @@ class Parser(object):
             elif self.current_token.type == INTEGER:
                 var_node = Var(self.current_token.value, self.lexer.line_count)
                 self.eat(INTEGER)
+            elif self.current_token.type == INT:
+                var_node = Var(self.current_token.value, self.lexer.line_count)
+                self.eat(INT)
             else:
                 var_node = Var(self.current_token.value, self.lexer.line_count)
                 self.eat(ID)
